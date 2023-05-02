@@ -1,0 +1,140 @@
+.container {
+  position: relative;
+  background-color: var(--primary-background-2);
+}
+
+.datepicker_toggle_button {
+  background-color: var(--primary-background-2);
+  cursor: pointer;
+  color: var(--primary-color-1);
+  font-size: 16px;
+  border: none;
+  outline: none;
+  padding: 10px;
+
+  &:hover {
+    filter: brightness(120%);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.icon {
+  padding: 0 10px;
+  font-size: 15px;
+}
+
+
+.disabled {
+  // color: var(--primary-color-3);
+  cursor: not-allowed;
+}
+
+.datepicker {
+  position: absolute;
+  top: 130%;
+  border: 2px solid var(--primary-color-2);
+  height: 400px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--primary-background-2);
+  z-index: 2000;
+  border-radius: 20px;
+}
+
+.date_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* background: red; */
+  height: 100%;
+}
+
+.buttons_container {
+  display: flex;
+}
+
+.buttons_container button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 20px;
+  font-weight: 500;
+  background-color: var(--primary-background-3);
+  color: var(--primary-color-1);
+  cursor: pointer;
+}
+
+.buttons_container button:nth-child(1) {
+  border-top-left-radius: 20px;
+  border-right: 1px solid var(--primary-color-1);
+}
+.buttons_container button:nth-child(3) {
+  border-top-right-radius: 20px;
+  border-left: 1px solid var(--primary-color-1);
+}
+
+button:hover {
+  filter: brightness(120%);
+}
+
+.sections_container {
+  height: 100%;
+}
+
+.range_container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: 20px;
+}
+
+.range_container button {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  background-color: var(--primary-background-2);
+  // border-top: 1px solid var(--primary-color-1);
+  border-bottom: 1px solid var(--primary-color-2);
+  color: var(--primary-color-1);
+  cursor: pointer;
+}
+
+.range_container button:last-child {
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.dp-hidden {
+  width: 0;
+  margin: 0;
+  border: none;
+  padding: 0;
+}
+.custom-day {
+  text-align: center;
+  padding: 0.185rem 0.25rem;
+  display: inline-block;
+  height: 2rem;
+  width: 2rem;
+}
+.custom-day.focused {
+  background-color: #e6e6e6;
+}
+.custom-day.range,
+.custom-day:hover {
+  background-color: var(--primary-background-3);
+  color: white;
+}
+.custom-day.faded {
+  background-color: rgba(2, 117, 216, 0.5);
+}

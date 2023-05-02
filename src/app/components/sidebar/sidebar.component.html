@@ -1,0 +1,36 @@
+<div class="dashboard__sidebar">
+  <div class="sidebar__icon">
+    <fa-icon [icon]="faBars" class="icon"></fa-icon>
+  </div>
+  <div class="sidebar__icon" routerLink="/dashboard">
+    <fa-icon
+      [icon]="faHome"
+      class="icon"
+      [ngClass]="currentRoute === '/dashboard' ? 'active' : ''"
+    ></fa-icon>
+  </div>
+  <div class="sidebar__icon" routerLink="/sales">
+    <fa-icon [icon]="faCashRegister" class="icon"></fa-icon>
+  </div>
+  <div class="sidebar__icon" routerLink="/area-chart">
+    <fa-icon
+      [icon]="faChartColumn"
+      class="icon"
+      [ngClass]="currentRoute === '/area-chart' ? 'active' : ''"
+    ></fa-icon>
+  </div>
+  <div class="sidebar__icon" routerLink="/org-chart">
+    <fa-icon
+      [icon]="faSitemap"
+      class="icon"
+      [ngClass]="currentRoute === '/org-chart' ? 'active' : ''"
+    ></fa-icon>
+  </div>
+
+  <div class="sidebar__icon">
+    <fa-icon [icon]="faMessage" class="icon"></fa-icon>
+  </div>
+  <div class="sidebar__icon">
+    <fa-icon [icon]="faGear" class="icon"></fa-icon>
+  </div>
+</div>

@@ -1,0 +1,81 @@
+<div class="container">
+  <button (click)="changeDateHandler('prev')" class="datepicker_toggle_button">
+    <fa-icon [icon]="faAngleLeft" class="icon"></fa-icon>
+  </button>
+  <button (click)="setDatePickerVisible()" class="datepicker_toggle_button">
+    <span>{{ getDateString() }}</span>
+    <fa-icon [icon]="faCalendar" class="icon"></fa-icon>
+  </button>
+  <div class="datepicker" *ngIf="datePickerVisible">
+    <div class="buttons_container">
+      <button (click)="changeSection('range')">
+        <fa-icon [icon]="faSliders" class="icon"></fa-icon>
+        <span> Range </span>
+      </button>
+      <button (click)="changeSection('date')">
+        <fa-icon [icon]="faCalendar" class="icon"></fa-icon>
+        <span>Date</span>
+      </button>
+      <button (click)="changeSection('recent')">
+        <fa-icon [icon]="faClockRotateLeft" class="icon"></fa-icon>
+        <span>Recent</span>
+      </button>
+    </div>
+    <div class="sections_container">
+      <div *ngIf="divName === 'range'; else second" class="range_container">
+        <button (click)="onRangeSelect('2h')">Last 2 hours</button>
+        <button (click)="onRangeSelect('6h')">Last 6 hours</button>
+        <button (click)="onRangeSelect('12h')">Last 12 hours</button>
+        <button (click)="onRangeSelect('1d')">Last 1 day</button>
+        <button (click)="onRangeSelect('1m')">Last 1 month</button>
+        <button (click)="onRangeSelect('6m')">Last 6 months</button>
+        <button (click)="onRangeSelect('1y')">Last 1 year</button>
+      </div>
+
+      <ng-template #second>
+        <div class="date_container" *ngIf="divName === 'date'; else third">
+          <ngb-datepicker
+            #dp
+            (dateSelect)="onDateSelection($event)"
+            [displayMonths]="1"
+            [dayTemplate]="t"
+            outsideDays="hidden"
+          >
+          </ngb-datepicker>
+
+          <ng-template #t let-date let-focused="focused">
+            <span
+              class="custom-day"
+              [class.focused]="focused"
+              [class.range]="isRange(date)"
+              [class.faded]="isHovered(date) || isInside(date)"
+              (mouseenter)="hoveredDate = date"
+              (mouseleave)="hoveredDate = null"
+            >
+              {{ date.day }}
+            </span>
+          </ng-template>
+        </div>
+      </ng-template>
+
+      <ng-template #third>
+        <div *ngIf="divName === 'recent'" class="range_container">
+          <button>Last 1 day</button>
+          <button>Last 1 month</button>
+          <button>Last 6 hours</button>
+          <button>Last 6 hours</button>
+          <button>Last 2 hours</button>
+          <button>Last 12 hours</button>
+          <button>Last 1 year</button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+  <button
+    (click)="changeDateHandler('next')"
+    class="datepicker_toggle_button"
+    [disabled]="isButtonDisabled"
+  >
+    <fa-icon [icon]="faAngleRight" class="icon"></fa-icon>
+  </button>
+</div>

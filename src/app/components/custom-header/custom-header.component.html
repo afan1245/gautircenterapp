@@ -1,0 +1,40 @@
+<div class="main_screen__topbar">
+  <div class="main_screen__topbar_left">
+    <img src="./assets/11111 1 (1).png" alt="" />
+    <span>Welcome, Dominic</span>
+  </div>
+  <div class="main_screen__topbar_right">
+    <!-- <div class="custom_datepicker">
+      <input
+        class="date-selector-input-box"
+        placeholder="{{ customDate | date : 'dd.MM.yyyy' }}"
+        angular-mydatepicker
+        name="mydate"
+        (click)="dp.toggleCalendar()"
+        (ngModel)="(model)"
+        [options]="myDpOptions"
+        #dp="angular-mydatepicker"
+        (dateChanged)="onDateChange($event)"
+      />
+      <fa-icon [icon]="faCalendar" class="icon"></fa-icon>
+    </div> -->
+    <div class="custom_datepicker">
+      <app-custom-daterange-picker
+        (onDateChange)="onDateChange($event)"
+        [fullDate]="fullDate"
+        [onRangeSelect]="onRangeSelect"
+        (changeDate)="changeDateHandler($event)"
+      ></app-custom-daterange-picker>
+    </div>
+    <div class="topbar_right__search">
+      <input type="text" placeholder="Search something..." />
+    </div>
+    <app-theme-switch></app-theme-switch>
+    <div class="topbar_right__notification_bell">
+      <fa-icon [icon]="faBell" class="bell_icon"></fa-icon>
+    </div>
+    <div class="topbar_right__profile">
+      <img src="../../../assets/user.png" alt="" />
+    </div>
+  </div>
+</div>

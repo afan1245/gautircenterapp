@@ -1,0 +1,38 @@
+<div class="dashboard__screen">
+  <div class="dashboard_container">
+    <app-sidebar></app-sidebar>
+    <div class="dashboard__main_screen">
+      <!-- header -->
+      <app-custom-header></app-custom-header>
+      <div class="main_screen__main_container">
+        <div class="main_container__heading">
+          <h3>Sales flow</h3>
+        </div>
+        <div class="main_container__charts_container">
+          <div class="loader-container" *ngIf="loader">
+            <div class="loader"></div>
+          </div>
+          <p-organizationChart
+            [value]="data"
+            (onNodeExpand)="expandNode($event)"
+          >
+            <ng-template let-node pTemplate="person">
+              <div
+                class="org_chart__node"
+                [style]="{
+                  width: node.data.width * 6 + 'px',
+                  height: node.data.width * 6 + 'px',
+                  background: node.data.color
+                }"
+              >
+                <!-- <div>{{ node.data.name }}</div> -->
+                <h3>{{ node.data.value }}</h3>
+                <span>{{ node.data.title }}</span>
+              </div>
+            </ng-template>
+          </p-organizationChart>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

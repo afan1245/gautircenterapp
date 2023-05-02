@@ -1,0 +1,72 @@
+<div class="spline_chart__screen">
+  <div class="spline_chart_container">
+    <app-sidebar></app-sidebar>
+    <div class="spline_chart__main_screen">
+
+      <app-custom-header></app-custom-header>
+      <div class="main_container__heading">
+        <h3>Analysis</h3>
+      </div>
+      <div class="spline_chart_container">
+        <table>
+          <thead>
+            <tr>
+              <th
+                (click)="onColumnHeaderClick('id')"
+                [ngClass]="{ selected: selectedColumnHeader === 'id' }"
+              >
+                ID
+              </th>
+              <th
+                (click)="onColumnHeaderClick('name')"
+                [ngClass]="{ selected: selectedColumnHeader === 'name' }"
+              >
+                Name
+              </th>
+              <th
+                (click)="onColumnHeaderClick('age')"
+                [ngClass]="{ selected: selectedColumnHeader === 'age' }"
+              >
+                Age
+              </th>
+              <th
+                (click)="onColumnHeaderClick('custom')"
+                [ngClass]="{ selected: selectedColumnHeader === 'custom' }"
+              >
+                Custom
+              </th>
+              <th
+                (click)="onColumnHeaderClick('data')"
+                [ngClass]="{ selected: selectedColumnHeader === 'data' }"
+              >
+                Data
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of data">
+              <td [ngClass]="{ selected: selectedColumnHeader === 'id' }">
+                {{ row.id }}
+              </td>
+              <td [ngClass]="{ selected: selectedColumnHeader === 'name' }">
+                {{ row.name }}
+              </td>
+              <td [ngClass]="{ selected: selectedColumnHeader === 'age' }">
+                {{ row.age }}
+              </td>
+              <td [ngClass]="{ selected: selectedColumnHeader === 'custom' }">
+                {{ row.custom }}
+              </td>
+              <td [ngClass]="{ selected: selectedColumnHeader === 'data' }">
+                {{ row.data }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="chart_container">
+          <div #chartContainer class="chart" ></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

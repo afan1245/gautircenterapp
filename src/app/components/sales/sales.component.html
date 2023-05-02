@@ -1,0 +1,109 @@
+<div class="loader-container" *ngIf="loader">
+  <div class="loader"></div>
+</div>
+
+<div *ngIf="showChangeModal">
+  <app-custom-modal>
+    <ngb-datepicker
+      #dp
+      [displayMonths]="1"
+      [dayTemplate]="t"
+      outsideDays="hidden"
+    >
+    </ngb-datepicker>
+
+    <ng-template #t let-date let-focused="focused">
+      <span class="custom-day" [class.focused]="focused">
+        {{ date.day }}
+      </span>
+    </ng-template>
+    <div class="custom_value__buttons">
+      <button class="cancel" (click)="toggleChangeModal()">Cancel</button>
+      <button class="apply">Apply</button>
+    </div>
+  </app-custom-modal>
+</div>
+
+<div class="sales__screen">
+  <div class="sales_container">
+    <app-sidebar></app-sidebar>
+    <div class="sales__main_screen">
+      <!-- header -->
+      <app-custom-header
+        (onDateChanged)="onGlobalDateRangeChanged($event)"
+        (changeDate)="changeDate($event)"
+        (onRangeSelect)="(onRangeSelect)"
+        [fullDate]="fullDate"
+      ></app-custom-header>
+      <div class="main_screen__main_container">
+        <div class="main_container__heading">
+          <h3>Sales</h3>
+          <!-- <h3>Edit</h3> -->
+        </div>
+        <div class="main_container__charts_container">
+          <div class="charts_container__chart">
+            <div class="chart_container_1_div_1">
+              <h1>${{ originalOrdersTotalTodayAbbr }}</h1>
+              <h3>{{ fullDate === todaysDate ? "Today" : fullDate }}</h3>
+              <app-custom-progress-bar
+                [customGoalProgress]="customGoalProgress"
+              ></app-custom-progress-bar>
+              <div class="div_1_progress_details">
+                <span>{{ customGoalProgress }}</span>
+
+                <div class="div_1_progress_details__date_change">
+                  <span (dblclick)="makeEditable()" *ngIf="!isEditable">
+                    ${{ customGoalAbbr }}
+                  </span>
+                  <input
+                    type="number"
+                    (ngModel)="(customGoal)"
+                    value="{{ customGoal }}"
+                    *ngIf="isEditable"
+                    (blur)="makeNonEditable()"
+                    (change)="setCustomGoal($event)"
+                  />
+                  <fa-icon
+                    [icon]="faCalendar"
+                    class="icon"
+                    (click)="toggleChangeModal()"
+                  ></fa-icon>
+                  <fa-icon
+                    [icon]="faCalendar"
+                    class="icon"
+                    class="date-selector-input-box"
+                    (click)="dp.toggleCalendar()"
+                    angular-mydatepicker
+                    [options]="myDpOptions"
+                    (dateChanged)="onDateChanged($event)"
+                    #dp="angular-mydatepicker"
+                  ></fa-icon>
+                </div>
+              </div>
+            </div>
+            <div class="chart_container_1_div_2">
+              <div class="select_chart_type">
+                <select
+                  name="chart"
+                  (ngModel)="(selectedChart)"
+                  (change)="onSelectChartChange($event)"
+                >
+                  <option disabled>Select Chart</option>
+                  <option value="column" selected>Column Chart</option>
+                  <option value="bar">Bar Chart</option>
+                  <option value="pie">Pie Chart</option>
+                </select>
+              </div>
+              <app-bar-chart *ngIf="selectedChart == 'bar'"></app-bar-chart>
+              <app-column-chart
+                *ngIf="selectedChart == 'column'"
+              ></app-column-chart>
+            </div>
+          </div>
+
+          <div class="charts_container__chart"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

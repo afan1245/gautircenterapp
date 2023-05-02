@@ -1,0 +1,249 @@
+<div class="loader-container" *ngIf="loader">
+  <div class="loader"></div>
+</div>
+
+<div *ngIf="showChangeModal">
+  <app-custom-modal>
+    <ngb-datepicker
+      #dp
+      [displayMonths]="1"
+      [dayTemplate]="t"
+      outsideDays="hidden"
+    >
+    </ngb-datepicker>
+
+    <ng-template #t let-date let-focused="focused">
+      <span class="custom-day" [class.focused]="focused">
+        {{ date.day }}
+      </span>
+    </ng-template>
+    <div class="custom_value__buttons">
+      <button class="cancel" (click)="toggleChangeModal()">Cancel</button>
+      <button class="apply">Apply</button>
+    </div>
+  </app-custom-modal>
+</div>
+
+<div class="dashboard__screen">
+  <div class="dashboard_container">
+    <app-sidebar></app-sidebar>
+    <div class="dashboard__main_screen">
+      <!-- header -->
+      <app-custom-header
+        (onDateChanged)="onGlobalDateRangeChanged($event)"
+        (onRangeSelect)="onRangeSelect"
+        [fullDate]="fullDate"
+      ></app-custom-header>
+      <div class="main_screen__main_container">
+        <div class="main_container__heading">
+          <h3>Dashboard</h3>
+          <!-- <h3>Edit</h3> -->
+        </div>
+        <div class="main_container__charts_container">
+          <div class="charts_container__chart">
+            <div class="chart_container_1_div_1">
+              <h1>${{ originalOrdersTotalTodayAbbr }}</h1>
+              <h3>{{ fullDate === todaysDate ? "Today" : fullDate }}</h3>
+              <app-custom-progress-bar
+                [customGoalProgress]="customGoalProgress"
+              ></app-custom-progress-bar>
+              <div class="div_1_progress_details">
+                <span>{{ customGoalProgress }}</span>
+
+                <div class="div_1_progress_details__date_change">
+                  <span (dblclick)="makeEditable()" *ngIf="!isEditable">
+                    ${{ customGoalAbbr }}
+                  </span>
+                  <input
+                    type="number"
+                    (ngModel)="(customGoal)"
+                    value="{{ customGoal }}"
+                    *ngIf="isEditable"
+                    (blur)="makeNonEditable()"
+                    (change)="setCustomGoal($event)"
+                  />
+                  <fa-icon
+                    [icon]="faCalendar"
+                    class="icon"
+                    (click)="toggleChangeModal()"
+                  ></fa-icon>
+                  <fa-icon
+                    [icon]="faCalendar"
+                    class="icon"
+                    class="date-selector-input-box"
+                    (click)="dp.toggleCalendar()"
+                    angular-mydatepicker
+                    [options]="myDpOptions"
+                    (dateChanged)="onDateChanged($event)"
+                    #dp="angular-mydatepicker"
+                  ></fa-icon>
+                </div>
+              </div>
+            </div>
+            <div class="chart_container_1_div_2">
+              <app-column-chart></app-column-chart>
+            </div>
+            <div class="chart_container_1_div_3">
+              <h3>By brand</h3>
+              <div class="div_3__progress_container">
+                <div class="progress_container__progress_detail">
+                  <span>Brand 1</span>
+                  <span>$4.5M</span>
+                </div>
+                <app-custom-progress-bar
+                  [customGoalProgress]="customGoalProgress"
+                ></app-custom-progress-bar>
+              </div>
+              <div class="div_3__progress_container">
+                <div class="progress_container__progress_detail">
+                  <span>Brand 2</span>
+                  <span>$0.2M</span>
+                </div>
+                <app-custom-progress-bar
+                  [customGoalProgress]="customGoalProgress"
+                ></app-custom-progress-bar>
+              </div>
+              <div class="div_3__progress_container">
+                <div class="progress_container__progress_detail">
+                  <span>Brand 3</span>
+                  <span>$1.2M</span>
+                </div>
+                <app-custom-progress-bar
+                  [customGoalProgress]="customGoalProgress"
+                ></app-custom-progress-bar>
+              </div>
+              <div class="div_3__progress_container">
+                <div class="progress_container__progress_detail">
+                  <span>Brand 4</span>
+                  <span>$0.7M</span>
+                </div>
+                <app-custom-progress-bar
+                  [customGoalProgress]="customGoalProgress"
+                ></app-custom-progress-bar>
+              </div>
+            </div>
+            <!-- <app-column-chart></app-column-chart>
+            <app-bar-chart [options]="barChartOptions"></app-bar-chart> -->
+          </div>
+
+          <div class="charts_container__chart">
+            <div class="chart_container_2_div_1">
+              <h2>Orders</h2>
+
+              <div class="div_1__orders_detail">
+                <h1>${{ currentYearTotalAbbr }}</h1>
+                <div
+                  class="positive_change"
+                  *ngIf="+percentChange >= 0; else otherDiv"
+                >
+                  <span>
+                    <fa-icon [icon]="faSortUp" class="icon"></fa-icon>
+                    {{ percentChange ? percentChange.toFixed(1) : null }}%</span
+                  >
+                </div>
+                <ng-template #otherDiv>
+                  <div class="negative_change">
+                    <span>
+                      <fa-icon [icon]="faSortDown" class="icon"></fa-icon>
+                      {{
+                        percentChange ? percentChange.toFixed(1) : null
+                      }}%</span
+                    >
+                  </div>
+                </ng-template>
+              </div>
+              <p>Vs</p>
+              <div class="div_1__orders_detail">
+                <h1>${{ pickedYearTotalAbbr }}</h1>
+                <div class="change_comparision_date">
+                  LY
+                  <!-- <button (click)="toggleChangeModal()">Change</button> -->
+                </div>
+              </div>
+            </div>
+            <div
+              class="chart_container_2_div_2"
+              *ngIf="!loading; else chart_container_2_div_2_loading"
+            >
+              <div class="choose_date">
+                <select
+                  name="year"
+                  (ngModel)="(selectedYear)"
+                  (change)="onSelectYearChange($event)"
+                >
+                  <option disabled selected>Year</option>
+                  <option value="2015">2015</option>
+                  <option value="2016">2016</option>
+                  <option value="2017">2017</option>
+                  <option value="2018">2018</option>
+                  <option value="2019">2019</option>
+                  <option value="2020">2020</option>
+                  <option value="2021">2021</option>
+                  <option value="2022">2022</option>
+                  <option value="2023">2023</option>
+                </select>
+
+                <select
+                  *ngIf="selectedYear !== ''"
+                  name="month"
+                  (ngModel)="(selectedMonth)"
+                  (change)="onSelectMonthChange($event)"
+                >
+                  <option disabled selected>Month</option>
+                  <option
+                    *ngFor="let month of monthList"
+                    [value]="month.monthNumber"
+                  >
+                    {{ month.monthName }}
+                  </option>
+                </select>
+
+                <select
+                  *ngIf="selectedYear !== '' && selectedMonth !== ''"
+                  name="days"
+                  (ngModel)="(selectedDay)"
+                  (change)="onSelectDayChange($event)"
+                >
+                  <option disabled selected>Day</option>
+                  <option *ngFor="let day of dayList" [value]="day">
+                    {{ day }}
+                  </option>
+                </select>
+              </div>
+              <app-bar-chart></app-bar-chart>
+            </div>
+            <ng-template #chart_container_2_div_2_loading>
+              <div class="chart_container_2_div_2_loading">
+                <app-loading-spinner></app-loading-spinner>
+              </div>
+            </ng-template>
+
+            <div class="chart_container_2_div_3">
+              <div class="div_3__info">
+                <h3>Opps at 90%</h3>
+                <div class="info__detail">
+                  <span>23</span>
+                  <span>$264K</span>
+                </div>
+              </div>
+              <div class="div_3__info">
+                <h3>Opps at 90%</h3>
+                <div class="info__detail">
+                  <span>23</span>
+                  <span>$264K</span>
+                </div>
+              </div>
+              <div class="div_3__info">
+                <h3>Opps at 90%</h3>
+                <div class="info__detail">
+                  <span>23</span>
+                  <span>$264K</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="chart_container_1_div_1">
+  <h1>${{ originalOrdersTotalTodayAbbr }}</h1>
+  <h3>YTD</h3>
+  <app-custom-progress-bar
+    [customGoalProgress]="customGoalProgress"
+  ></app-custom-progress-bar>
+  <div class="div_1_progress_details">
+    <span>{{ customGoalProgress }}</span>
+    <input
+      type="number"
+      (ngModel)="(customGoal)"
+      value="{{ customGoal }}"
+      *ngIf="isEditable"
+      (blur)="makeNonEditable()"
+      (change)="setCustomGoal($event)"
+    />
+    <span (dblclick)="makeEditable()" *ngIf="!isEditable">
+      ${{ customGoalAbbr }}
+    </span>
+  </div>
+</div>

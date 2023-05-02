@@ -1,0 +1,99 @@
+.main_screen__topbar {
+  // border: 1px solid rgb(3, 2, 2);
+  border-bottom: 1px solid #ccc;
+  height: 80px;
+  display: flex;
+  border-top-left-radius: 20px;
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .main_screen__topbar_left {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    img {
+      width: 90px;
+      height: 48px;
+      border-top-left-radius: 20px;
+      padding-right: 15px;
+      margin: 10px;
+      border-right: 1px solid #ccc;
+      object-fit: contain;
+    }
+
+    span {
+      color: var(--primary-color-1);
+    }
+  }
+
+  .main_screen__topbar_right {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+
+    .custom_datepicker {
+      margin-right: 20px;
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.25);
+      color: var(--primary-color-1);
+      display: flex;
+      border-radius: 10px;
+
+      .date-selector-input-box {
+        color: var(--primary-color-1);
+        background-color: transparent;
+        width: 100%;
+        cursor: pointer;
+        border: none;
+        outline: none;
+        text-align: center;
+      }
+    }
+
+    .topbar_right__search {
+      display: flex;
+      align-items: center;
+      margin-right: 20px;
+
+      input {
+        border: none;
+        outline: none;
+        padding: 10px;
+        background: transparent;
+        width: 200px;
+        color: var(--primary-color-1);
+        cursor: pointer;
+        border-bottom: 1px solid var(--primary-background-1);
+      }
+    }
+
+    .topbar_right__notification_bell {
+      width: 25px;
+      height: 25px;
+      margin-left: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .bell_icon {
+        object-fit: contain;
+        font-size: 20px;
+      }
+    }
+
+    .topbar_right__profile {
+      width: 25px;
+      height: 25px;
+      margin-left: 20px;
+      cursor: pointer;
+      img {
+        object-fit: contain;
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+}

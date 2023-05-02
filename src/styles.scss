@@ -1,0 +1,91 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+:root {
+  --primary-color-1: #000;
+  --primary-color-2: #817979;
+  --primary-color-3: #e7131a;
+  --primary-background-1: #e7131a;
+  --primary-background-2: #f2f2f2;
+  --primary-background-3: #fff;
+  --primary-boxshadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.dark-theme {
+  --primary-color-1: #ffffff;
+  --primary-color-2: #817979;
+  --primary-background-1: #e7131a;
+  --primary-background-2: #0b2447;
+  --primary-background-3: #19376d;
+  --primary-boxshadow: rgba(255, 255, 255, 0.16) 0px 1px 4px;
+}
+
+body {
+  background: var(--primary-background-2);
+  color: var(--primary-color-1);
+}
+// @import 'ag-grid-community/styles/ag-grid.css';
+// @import 'ag-grid-community/styles/ag-theme-alpine.css';
+@import "~primeng/resources/themes/bootstrap4-light-purple/theme.css";
+@import "~primeng/resources/primeng.min.css";
+
+*::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  background-color: #f5f5f5;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--primary-background-1);
+}
+
+.ngb-dp-day {
+  width: 45px !important;
+  height: 45px !important;
+}
+
+.ngb-dp-day > div {
+  width: 45px !important;
+  height: 45px !important;
+  line-height: 45px !important;
+}
+
+.ngb-dp-weekday {
+  width: 45px !important;
+}
+
+
+
+select {
+  outline: 0;
+  box-shadow: none;
+  border: 0;
+  margin-right: 15px;
+  border-bottom: 1px solid var(--primary-color-3);
+  background: transparent;
+  background-image: none;
+  flex: 1;
+  color: var(--primary-color-1);
+  cursor: pointer;
+  font-size: 1em;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+option {
+  background-color: var(--primary-background-2);
+  color: var(--primary-color-1);
+}
+
