@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "deploy": "ng build && cp appspec.yml build/. && cp -R scripts build/.",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
