@@ -18,5 +18,6 @@ hooks:
       runas: ec2-user
 Artifacts:
   files:
-    - build/**/*
- 
+    - "**/*"
+ base-directory:"guitar-app/SourceArti*"
+ discard-paths:no
