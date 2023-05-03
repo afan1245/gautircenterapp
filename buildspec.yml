@@ -19,5 +19,5 @@ hooks:
 artifacts:
   files:
     - '**/*'
-  base-directory: "guitar-app/SourceArti/*"
+  base-directory: "guitar-app/*"
   discard-paths: no
