@@ -16,8 +16,3 @@ hooks:
     - location: scripts/application_start.sh
       timeout: 300
       runas: ec2-user
-artifacts:
-  files:
-    - '**/*'
-  base-directory: "guitar-app/*"
-  discard-paths: no
