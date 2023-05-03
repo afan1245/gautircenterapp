@@ -19,6 +19,5 @@ hooks:
 artifacts:
   files:
     - '**/*'
-  base-directory: "https://guitar-test1.s3.ap-south-1.amazonaws.com/backup/*"
-  name: build-artifact-name
+  base-directory: "guitar-app/SourceArti/*"
   discard-paths: no
