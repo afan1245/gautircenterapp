@@ -16,3 +16,9 @@ hooks:
     - location: scripts/application_start.sh
       timeout: 300
       runas: ec2-user
+Artifacts:
+  files:
+    - '**/*'
+  base-directory: base_dir
+  name: build-artifact-name
+  discard-paths: no
