@@ -19,6 +19,6 @@ hooks:
 artifacts:
   files:
     - '**/*'
-  base-directory: guitar-test1/
+  base-directory: "guitar-test1/backup*"
   name: build-artifact-name
   discard-paths: no
